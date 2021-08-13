@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.web.dao.ClassNotesDao">
+
+    <select id="findAll" resultType="cn.web.domain.ClassNotes">
+        select
+        *
+        from
+        ClassNotes
+        <where>
+            <if test="cnsubject != null and cnsubject.trim() != ''">
+                cnsubject like '%${cnsubject}%'
+            </if>
+        </where>
+    </select>
+
+    <insert id="add">
+        insert into
+        ClassNotes(cnno,cno,cntime,cncontent,cnsubject,cnpublisher,cnreader)
+        values
+        (#{cnno},#{cno},#{cntime},#{cncontent},#{cnsubject},#{cnpublisher},#{cnreader})
+    </insert>
+
+
+    <select id="queryByKey" resultType="cn.web.domain.ClassNotes">
+        select *
+        from ClassNotes
+        where cnno=#{cnno}
+    </select>
+
+    <delete id="delete">
+        delete
+        from ClassNotes
+        where cnno=#{cnno}
+    </delete>
+
+    <update id="update">
+        update
+        ClassNotes
+        <set>
+            <if test="cno != null and cno.trim() != ''">
+                cno=#{cno},
+            </if>
+            <if test="cntime != null">
+                cntime=#{cntime},
+            </if>
+            <if test="cncontent != null and cncontent.trim() != ''">
+                cncontent=#{cncontent},
+            </if>
+            <if test="cnsubject != null and cnsubject.trim() != ''">
+                cnsubject=#{cnsubject},
+            </if>
+            <if test="cnpublisher != null and cnpublisher.trim() != ''">
+                cnpublisher=#{cnpublisher},
+            </if>
+            <if test="cnreader != null and cnreader.trim() != ''">
+                cnreader=#{cnreader}
+            </if>
+        </set>
+        where cnno=#{cnno}
+    </update>
+
+</mapper>

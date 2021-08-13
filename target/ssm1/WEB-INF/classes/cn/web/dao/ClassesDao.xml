@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.web.dao.ClassesDao">
+
+    <select id="countClassnum" resultType="map">
+        select Cname,Amount
+        from Classes
+    </select>
+
+    <select id="countGradenum" resultType="map">
+        select Grade as grade,sum(Amount) as Num
+        from Classes
+        GROUP BY Grade
+    </select>
+
+    <select id="findAll" resultType="cn.web.domain.Classes">
+        select
+        *
+        from
+        Classes
+        <where>
+            <if test="grade != null and grade.trim() != ''">
+                grade like '%${grade}%'
+            </if>
+        </where>
+    </select>
+
+    <insert id="add">
+        insert into
+        Classes(Cno,Cname,Academy,Specialty,Grade,Amount,Description)
+        values
+        (#{cno},#{cname},#{academy},#{specialty},#{grade},#{amount},#{description})
+    </insert>
+
+
+    <select id="queryByKey" resultType="cn.web.domain.Classes">
+        select *
+        from Classes
+        where Cno=#{cno}
+    </select>
+
+    <delete id="delete">
+        delete
+        from Classes
+        where Cno=#{cno}
+    </delete>
+
+    <update id="update">
+        update
+        Classes
+        <set>
+            <if test="cname != null and cname.trim() != ''">
+                Cname=#{cname},
+            </if>
+            <if test="academy != null and academy.trim() != ''">
+                Academy=#{academy},
+            </if>
+            <if test="specialty != null and specialty.trim() != ''">
+                Specialty=#{specialty},
+            </if>
+            <if test="grade != null and grade.trim() != ''">
+                Grade=#{grade},
+            </if>
+            <if test="amount != null">
+                Amount=#{amount},
+            </if>
+            <if test="description != null and description.trim() != ''">
+                Description=#{description}
+            </if>
+        </set>
+        where Cno=#{cno}
+    </update>
+</mapper>

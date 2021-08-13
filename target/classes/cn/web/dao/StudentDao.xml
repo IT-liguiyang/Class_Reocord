@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.web.dao.StudentDao">
+
+
+
+    <select id="findAll" resultType="cn.web.domain.Student">
+        select
+        *
+        from
+        Student
+        <where>
+            <if test="realname != null and realname.trim() != ''">
+                Realname like '%${realname}%'
+            </if>
+        </where>
+    </select>
+
+
+
+    <insert id="addStudent">
+        insert into
+        Student(Username,Cno,Realname,Sex,Birthday,Email,Telephone,Hobby,Signature,Password)
+        values
+        (#{username},#{cno},#{realname},#{sex},#{birthday},#{email},#{telephone},#{hobby},#{signature},#{password})
+    </insert>
+
+
+
+
+
+
+    <select id="queryStudentByPrimaryKey" resultType="cn.web.domain.Student">
+        select *
+        from Student
+        where Username=#{username}
+    </select>
+
+    <delete id="deleteStudent">
+        delete
+        from Student
+        where Username=#{username}
+    </delete>
+
+    <update id="updateStudent">
+        update
+        Student
+        <set>
+            <if test="cno != null and cno.trim() != ''">
+                Cno=#{cno},
+            </if>
+            <if test="realname != null">
+                Realname=#{realname},
+            </if>
+            <if test="sex != null and sex.trim() != ''">
+                Sex=#{sex},
+            </if>
+            <if test="birthday != null and birthday.trim() != ''">
+                Birthday=#{birthday}
+            </if>
+            <if test="birthplace != null and birthplace.trim() != ''">
+                Birthplace=#{birthplace},
+            </if>
+            <if test="email != null">
+                Email=#{email},
+            </if>
+            <if test="telephone != null and telephone.trim() != ''">
+                Telephone=#{telephone},
+            </if>
+            <if test="hobby != null and hobby.trim() != ''">
+                Hobby=#{hobby}
+            </if>
+
+            <if test="signature != null and signature.trim() != ''">
+                Signature=#{signature},
+            </if>
+
+            <if test="password != null and password.trim() != ''">
+                Password=#{password}
+            </if>
+        </set>
+        where Username=#{username}
+    </update>
+</mapper>

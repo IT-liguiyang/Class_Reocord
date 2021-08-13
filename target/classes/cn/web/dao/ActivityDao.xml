@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.web.dao.ActivityDao">
+
+    <select id="findAll" resultType="cn.web.domain.Activity">
+        select 
+        *
+        from 
+        Activity
+        <where>
+            <if test="aplace != null and aplace.trim() != ''">
+                aplace like '%${aplace}%'
+            </if> 
+        </where>
+    </select>
+    
+    <insert id="addActivity">
+        insert into
+        Activity(Ano,Cno,Aplace,Atime,Acontent)
+        values
+        (#{ano},#{cno},#{aplace},#{atime},#{acontent})
+    </insert>
+
+
+    <select id="queryActivityByAno" resultType="cn.web.domain.Activity">
+        select *
+        from Activity
+        where Ano=#{ano}
+    </select>
+
+    <delete id="deleteActivity">
+        delete
+        from Activity
+        where Ano=#{ano}
+    </delete>
+
+    <update id="updateActivity">
+        update
+        Activity
+        <set>
+            <if test="cno != null and cno.trim() != ''">
+              Cno=#{cno},
+            </if>
+            <if test="aplace != null and aplace.trim() != ''">
+              Aplace=#{aplace},
+            </if>
+            <if test="atime != null">
+              Atime=#{atime},
+            </if>
+            <if test="acontent != null and acontent.trim() != ''">
+              Acontent=#{acontent}
+            </if>
+        </set>
+        where Ano=#{ano}
+    </update>
+
+</mapper>

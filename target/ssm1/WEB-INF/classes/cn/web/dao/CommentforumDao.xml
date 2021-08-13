@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.web.dao.CommentforumDao">
+
+
+
+    <select id="findAll" resultType="cn.web.domain.Commentforum">
+        select
+        *
+        from
+        Commentforum
+        <where>
+            <if test="cfcontent != null and cfcontent.trim() != ''">
+                Cfcontent like '%${cfcontent}%'
+            </if>
+        </where>
+    </select>
+
+
+
+    <insert id="addCommentforum">
+        insert into
+        Commentforum(Cfno,Username,Rno,Cfname,Cftime,Cfcontent)
+        values
+        (#{cfno},#{username},#{rno},#{cfname},#{cftime},#{cfcontent})
+    </insert>
+
+
+    <select id="queryCommentforumByPrimaryKey" resultType="cn.web.domain.Commentforum">
+        select *
+        from Commentforum
+        where Cfno=#{cfno}
+    </select>
+
+    <delete id="deleteCommentforum">
+        delete
+        from Commentforum
+        where Cfno=#{cfno}
+    </delete>
+
+    <update id="updateCommentforum">
+        update
+        Commentforum
+        <set>
+            <if test="username != null and username.trim() != ''">
+                Username=#{username},
+            </if>
+            <if test="rno != null">
+                Rno=#{rno},
+            </if>
+            <if test="cfname != null and cfname.trim() != ''">
+                Cfname=#{cfname},
+            </if>
+            <if test="cftime != null">
+                Cftime=#{cftime},
+            </if>
+            <if test="cfcontent != null and cfcontent.trim() != ''">
+                Cfcontent=#{cfcontent}
+            </if>
+        </set>
+        where Cfno=#{cfno}
+    </update>
+</mapper>

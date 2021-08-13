@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.web.dao.CommentActivityThoughtDao">
+
+
+
+    <select id="findAll" resultType="cn.web.domain.CommentActivityThought">
+        select
+        *
+        from
+        CommentActivityThought
+        <where>
+            <if test="cacontent != null and cacontent.trim() != ''">
+                Cacontent like '%${cacontent}%'
+            </if>
+        </where>
+    </select>
+
+
+
+    <insert id="addCommentActivityThought">
+        insert into
+        CommentActivityThought(Cano,Username,Atno,Cacontent,Catime)
+        values
+        (#{cano},#{username},#{atno},#{cacontent},#{catime})
+    </insert>
+
+
+    <select id="queryCommentActivityThoughtByPrimaryKey" resultType="cn.web.domain.CommentActivityThought">
+        select *
+        from CommentActivityThought
+        where Cano=#{cano}
+    </select>
+
+    <delete id="deleteCommentActivityThought">
+        delete
+        from CommentActivityThought
+        where Cano=#{cano}
+    </delete>
+
+    <update id="updateCommentActivityThought">
+        update
+        CommentActivityThought
+        <set>
+            <if test="username != null and username.trim() != ''">
+                Username=#{username},
+            </if>
+            <if test="atno != null">
+                Atno=#{atno},
+            </if>
+            <if test="cacontent != null and cacontent.trim() != ''">
+                Cacontent=#{cacontent},
+            </if>
+            <if test="catime != null">
+                Catime=#{catime}
+            </if>
+        </set>
+        where Cano=#{cano}
+    </update>
+</mapper>

@@ -1,0 +1,132 @@
+#login_wrap {
+    width:100%;
+    height:100%;
+    overflow: hidden;
+    position: relative;
+}
+
+.login-box {
+    width: 360px;
+    height: 450px;
+    position: absolute;
+    top: 20%;
+    left:50%;
+    margin-left: -180px;
+    background: #00a0e9;
+}
+.title {
+    height: 80px;
+    line-height: 80px;
+    background: #7b88a1;
+    font-size: 22px;
+    padding:0 30px;
+    text-align: center;
+    font-family: Candara;
+}
+.title img {
+    float: left;
+    margin-top: 12px;
+    margin-right: 15px;
+}
+.login_inner {
+    overflow: hidden;
+    padding: 10px 50px;
+}
+
+.alert {
+    margin: 0 auto;
+    padding: 6px 10px;
+    text-align: left;
+    color: #a94442;
+    margin-bottom: 17px;
+    font-size: 12px;
+}
+.login_inner form{
+    width: 100%;
+    overflow: hidden;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #eee;
+}
+.login_inner input {
+    display: inline-block;
+    width: 246px;
+    height: 30px;
+    border: 1px solid #d8d8d8;
+    font-size: 14px;
+    color: #666;
+    line-height: 28px;
+    padding: 6px 0 6px 12px;
+    box-shadow: 0 0 5px #fff;
+    outline: none;
+    transition: box-shadow 0.25s linear 0s;
+    -webkit-transition: box-shadow 0.25s linear 0s;
+    margin-bottom: 17px;
+}
+.verify input {
+    width: 95px;
+    margin-right: 20px;
+    float: left;
+    margin-bottom: 0;
+}
+
+.submit_btn button{
+    width: 120px;
+    height: 40px;
+    border: none;
+    background-color: #7b88a1;
+    text-align: center;
+    line-height: 40px;
+    color: #000;
+    cursor: pointer;
+    float: left;
+    position: absolute;
+    top: 330px;
+    left: 50px;
+}
+
+.reset_btn{
+    width: 120px;
+    height: 40px;
+    border: none;
+    background-color: #7b88a1;
+    text-align: center;
+    line-height: 40px;
+    color: #000;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    float: right;
+    position: absolute;
+    top: 330px;
+    right: 52px;
+}
+
+.auto_login {
+   margin-top: 15px;
+    float: left;
+    position: absolute;
+    left: 0px;
+    top: 272px;
+}
+.submit_btn .checkbox {
+    float: left;
+    width: 17px;
+    margin: 0px 5px 0 54px;
+}
+.submit_btn  span {
+    line-height: 39px;
+}
+
+.reg {
+    border-top: 1px solid #eeeeee;
+    margin-top: 90px;
+    width: 100%;
+    height: 40px;
+    line-height: 40px;
+    background: #f1f1f1;
+    text-align: center;
+    font-size: 16px;
+}
+.reg a {
+    color: #fc7f7f;
+}

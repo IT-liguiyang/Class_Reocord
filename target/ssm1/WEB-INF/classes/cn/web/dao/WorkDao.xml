@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.web.dao.WorkDao">
+
+
+    <select id="findAll" resultType="cn.web.domain.Work">
+        select
+        *
+        from
+        Work
+        <where>
+            <if test="comaddress != null and comaddress.trim() != ''">
+                Comaddress like '%${comaddress}%'
+            </if>
+        </where>
+    </select>
+
+
+    <insert id="addWork">
+        insert into
+        Work(Comno,Username,Comname,Comaddress,Comduty)
+        values
+        (#{comno},#{username},#{comname},#{comaddress},#{comduty})
+    </insert>
+
+
+    <select id="queryWorkByPrimaryKey" resultType="cn.web.domain.Work">
+        select *
+        from Work
+        where Comno=#{comno}
+    </select>
+
+    <delete id="deleteWork">
+        delete
+        from Work
+        where Comno=#{comno}
+    </delete>
+
+    <update id="updateWork">
+        update
+        Work
+        <set>
+            <if test="username != null and username.trim() != ''">
+                Username=#{username},
+            </if>
+            <if test="comname != null">
+                Comname=#{comname},
+            </if>
+            <if test="comaddress != null and comaddress.trim() != ''">
+                Comaddress=#{comaddress},
+            </if>
+            <if test="comduty != null and comduty.trim() != ''">
+                Comduty=#{comduty}
+            </if>
+        </set>
+        where Comno=#{comno}
+    </update>
+</mapper>

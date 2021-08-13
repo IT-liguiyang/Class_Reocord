@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.web.dao.ReleaseforumDao">
+
+
+
+    <select id="findAll" resultType="cn.web.domain.Releaseforum">
+        select
+        *
+        from
+        Releaseforum
+        <where>
+            <if test="rcontent != null and rcontent.trim() != ''">
+                Rcontent like '%${rcontent}%'
+            </if>
+        </where>
+    </select>
+
+
+
+    <insert id="addReleaseforum">
+        insert into
+        Releaseforum(Rno,Username,Rname,Rtime,Rcontent)
+        values
+        (#{rno},#{username},#{rname},#{rtime},#{rcontent})
+    </insert>
+
+
+    <select id="queryReleaseforumByPrimaryKey" resultType="cn.web.domain.Releaseforum">
+        select *
+        from Releaseforum
+        where Rno=#{rno}
+    </select>
+
+    <delete id="deleteReleaseforum">
+        delete
+        from Releaseforum
+        where Rno=#{rno}
+    </delete>
+
+    <update id="updateReleaseforum">
+        update
+        Releaseforum
+        <set>
+            <if test="username != null and username.trim() != ''">
+                Username=#{username},
+            </if>
+            <if test="rname != null">
+                Rname=#{rname},
+            </if>
+            <if test="rtime != null">
+                Rtime=#{rtime},
+            </if>
+            <if test="rcontent != null and rcontent.trim() != ''">
+                Rcontent=#{rcontent}
+            </if>
+        </set>
+        where Rno=#{rno}
+    </update>
+</mapper>

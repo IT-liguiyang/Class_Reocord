@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.web.dao.HomeInfoDao">
+
+
+
+    <select id="findAll" resultType="cn.web.domain.HomeInfo">
+        select
+        *
+        from
+        HomeInfo
+        <where>
+            <if test="hcity != null and hcity.trim() != ''">
+                Hcity like '%${hcity}%'
+            </if>
+        </where>
+    </select>
+
+
+
+    <insert id="addHomeInfo">
+        insert into
+        HomeInfo(Hno,Username,Hcity,Hstreet)
+        values
+        (#{hno},#{username},#{hcity},#{hstreet})
+    </insert>
+
+
+    <select id="queryHomeInfoByPrimaryKey" resultType="cn.web.domain.HomeInfo">
+        select *
+        from HomeInfo
+        where Hno=#{hno}
+    </select>
+
+    <delete id="deleteHomeInfo">
+        delete
+        from HomeInfo
+        where Hno=#{hno}
+    </delete>
+
+    <update id="updateHomeInfo">
+        update
+        HomeInfo
+        <set>
+            <if test="username != null and username.trim() != ''">
+                Username=#{username},
+            </if>
+            <if test="hcity != null">
+                Hcity=#{hcity},
+            </if>
+            <if test="hstreet != null and hstreet.trim() != ''">
+                Comaddress=#{comaddress},
+            </if>
+
+        </set>
+        where Hno=#{hno}
+    </update>
+</mapper>
